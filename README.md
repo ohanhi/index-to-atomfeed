@@ -1,2 +1,5 @@
-# index-to-atomfeed
-Experimental io.js service for transforming an Apache index into an Atom feed.
+# Index to Podcast
+Experimental io.js service for transforming an Apache index page into a Podcast RSS feed.
+
+
+License: MIT
