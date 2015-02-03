@@ -1,0 +1,33 @@
+{
+  "name": "index-to-atomfeed",
+  "version": "0.0.1",
+  "description": "Experimental io.js service for transforming an Apache index into a Podcast RSS feed.",
+  "main": "index.js",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "express": "^4.11.2",
+    "request": "^2.52.0",
+    "mustache": "^1.0.0"
+  },
+  "engines": {
+    "iojs": "1.0.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "6to5 index.es6 --out-file index.js",
+    "start": "node index.js",
+    "start-io": "iojs index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ohanhi/index-to-atomfeed.git"
+  },
+  "keywords": [
+    "iojs",
+    "experimental"
+  ],
+  "author": "ohanhi",
+  "license": "MIT",
+  "homepage": "https://github.com/ohanhi/index-to-atomfeed"
+}
