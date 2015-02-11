@@ -18,18 +18,19 @@
 
           var objectify = function (idx, item) {
             var url = scrapeUrl + $(item).attr("href");
+            url = url.replace(/ /g, "%20");
             if (!url.match(/\.mp3$/gi)) {
               return;
             }
 
             var linkText = $(item).text();
-            var titleMatches = linkText.match(/\]\s(.+)\.mp3$/);
+            var titleMatches = linkText.match(/(.+)\.mp3$/);
             var title = titleMatches ? titleMatches[1] : "";
             var dateMatches = linkText.match(/\[([0-9\.]+)\]/);
             var date = dateMatches ? dateMatches[1].replace(/\./g, "-") : "";
 
             return {
-              title: date + " " + title,
+              title: title,
               date: date,
               link: url
             };
