@@ -28,7 +28,7 @@
           let date = dateMatches ? dateMatches[1].replace(/\./g, '-') : "";
 
           return {
-            'title': title,
+            'title': date + " " + title,
             'date': date,
             'link': url
           };
@@ -77,11 +77,11 @@
 <description>{{title}} (scraped from HTML)</description>\
 <enclosure url="{{link}}" type="audio/mpeg"/>\
 <category>Podcasts</category>\
-<pubDate>{{pubDate}}</pubDate>\
+<pubDate>{{date}}</pubDate>\
 <itunes:author>{{author}}</itunes:author>\
 <itunes:explicit>No</itunes:explicit>\
-<itunes:subtitle>{{title}}, {{prettyDate}}</itunes:subtitle>\
-<itunes:summary>{{title}}, {{prettyDate}}</itunes:summary>\
+<itunes:subtitle>{{title}}</itunes:subtitle>\
+<itunes:summary>{{title}}</itunes:summary>\
 </item>';
 
   app.get('/scrape', (req, res) => {
@@ -98,7 +98,12 @@
     };
 
     let itemsToResponse = (items) => {
-      let feedItems = items.map( (item) => (Mustache.render(itemTemplate, item)) );
+      let tempItems = items.map( (item) => {
+        let d = new Date(item.date);
+        item.prettyDate = item.date;
+        return item;
+      } );
+      let feedItems = tempItems.map( (item) => (Mustache.render(itemTemplate, item)) );
 
       let feed = Mustache.render(rssStartTemplate, data)
         + feedItems.join(' ')

@@ -4,10 +4,11 @@
   "description": "Experimental io.js service for transforming an Apache index into a Podcast RSS feed.",
   "main": "index.js",
   "dependencies": {
+    "6to5": "^3.5.3",
     "cheerio": "^0.18.0",
     "express": "^4.11.2",
-    "request": "^2.52.0",
-    "mustache": "^1.0.0"
+    "mustache": "^1.0.0",
+    "request": "^2.52.0"
   },
   "engines": {
     "iojs": "1.0.x"

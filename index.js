@@ -29,7 +29,7 @@
             var date = dateMatches ? dateMatches[1].replace(/\./g, "-") : "";
 
             return {
-              title: title,
+              title: date + " " + title,
               date: date,
               link: url
             };
@@ -50,7 +50,7 @@
 
   var rssEndTemplate = "</channel></rss>";
 
-  var itemTemplate = "<item><title>{{title}}</title><link>{{link}}</link><guid>{{link}}</guid><description>{{title}} (scraped from HTML)</description><enclosure url=\"{{link}}\" type=\"audio/mpeg\"/><category>Podcasts</category><pubDate>{{pubDate}}</pubDate><itunes:author>{{author}}</itunes:author><itunes:explicit>No</itunes:explicit><itunes:subtitle>{{title}}, {{prettyDate}}</itunes:subtitle><itunes:summary>{{title}}, {{prettyDate}}</itunes:summary></item>";
+  var itemTemplate = "<item><title>{{title}}</title><link>{{link}}</link><guid>{{link}}</guid><description>{{title}} (scraped from HTML)</description><enclosure url=\"{{link}}\" type=\"audio/mpeg\"/><category>Podcasts</category><pubDate>{{date}}</pubDate><itunes:author>{{author}}</itunes:author><itunes:explicit>No</itunes:explicit><itunes:subtitle>{{title}}</itunes:subtitle><itunes:summary>{{title}}</itunes:summary></item>";
 
   app.get("/scrape", function (req, res) {
     console.log(new Date());
@@ -66,7 +66,12 @@
     };
 
     var itemsToResponse = function (items) {
-      var feedItems = items.map(function (item) {
+      var tempItems = items.map(function (item) {
+        var d = new Date(item.date);
+        item.prettyDate = item.date;
+        return item;
+      });
+      var feedItems = tempItems.map(function (item) {
         return Mustache.render(itemTemplate, item);
       });
 
